@@ -9,8 +9,8 @@ import {
     Container,
     Title,
     Label,
-    InputPassword,
-    InputEmail,
+    InputTop,
+    InputBottom,
     MsgBox,
     SendBox,
     Submit,
@@ -19,10 +19,13 @@ import {
     Orbit
 } from "./style"
 
-export default function FormLogin() {
+export default function FormSignin() {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [adress, setAdress] = useState('')
+    const [houseNumber, setHouseNumber] = useState(false)
+
     const [load, setLoad] = useState(false)
     const [view, setView] = useState(false)
     const navigate = useNavigate();
@@ -30,7 +33,7 @@ export default function FormLogin() {
 
     function Authenticate() {
 
-        const user = { email: email, password: password }
+        const user = { cidade: city, estado: state, endereco: adress, numero: houseNumber }
         setView(false)
         setLoad(true)
 
@@ -76,20 +79,36 @@ export default function FormLogin() {
 
                     :
                     <>
-                        <InputEmail
-                            id="email"
-                            name="email"
-                            placeholder='Email'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                        <InputTop
+                            id="city"
+                            name="city"
+                            placeholder='Cidade'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                        
+                        <InputTop
+                            id="state"
+                            name="state"
+                            placeholder='Estado'
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
                         />
 
-                        <InputPassword
-                            id="password"
-                            name="password"
-                            placeholder='Senha'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                        <InputTop
+                            id="adress"
+                            name="adress"
+                            placeholder='Endereço'
+                            value={adress}
+                            onChange={(e) => setAdress(e.target.value)}
+                        />
+
+                        <InputBottom
+                            id="house_number"
+                            name="house_number"
+                            placeholder='Número da residência'
+                            value={houseNumber}
+                            onChange={(e) => setHouseNumber(e.target.value)}
                         />
 
                         {
