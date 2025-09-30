@@ -2,6 +2,15 @@
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./build"
-  }
+    "outDir": "./build",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@ioc/*": ["./.adonisrc.json"],
+      "#app/*": ["./app/*"],
+      "#models/*": ["./app/Models/*"],
+      "#controllers/*": ["./app/Controllers/*"]
+    }
+  },
+  "include": ["start", "app", "contracts", "build", "adonis.ts"]
 }

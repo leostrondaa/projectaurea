@@ -9,11 +9,18 @@ export default class extends BaseSchema {
       table.string('full_name').nullable()
       table.string('email', 254).notNullable().unique()
       table.string('password').notNullable()
+      table.string('cpf', 11).notNullable().unique()
+
+      table.string('cidade').notNullable()
+      table.string('estado', 2).notNullable()
+      table.string('rua').notNullable()
+      table.integer('numero').notNullable()
 
       table.integer('papel_id').unsigned().references('id').inTable('papels')
 
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
+
     })
   }
 

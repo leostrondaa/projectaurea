@@ -1,16 +1,11 @@
-import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Papel from '#models/papel'
 
 export default class extends BaseSeeder {
-  async run() {
-    // Write your database queries inside the run method
+  public async run () {
     await Papel.createMany([
-      {
-        nome: 'Coordenador',
-      },
-      {
-        nome: 'Professor',
-      },
+      { nome: 'admin' },
+      { nome: 'cliente' },
     ])
   }
 }
