@@ -1,4 +1,4 @@
-import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Papel from '#models/papel'
 
 export default class extends BaseSeeder {

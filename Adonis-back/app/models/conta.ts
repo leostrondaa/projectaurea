@@ -1,4 +1,6 @@
-import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 import User from './user.js'
 import Transacao from './transacao.js'
 import Aplicacao from './investimento.js'
@@ -20,10 +22,10 @@ export default class Conta extends BaseModel {
   declare saldo: number
 
   @column.dateTime({ autoCreate: true })
-  declare createdAt: Date
+  declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: Date | null
+  declare updatedAt: DateTime | null
 
   @belongsTo(() => User, { foreignKey: 'user_id' })
   declare user: BelongsTo<typeof User>

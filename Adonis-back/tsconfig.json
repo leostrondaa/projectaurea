@@ -3,14 +3,32 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
+    "baseUrl": ".",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@ioc/*": ["./.adonisrc.json"],
-      "#app/*": ["./app/*"],
-      "#models/*": ["./app/Models/*"],
-      "#controllers/*": ["./app/Controllers/*"]
+      "@ioc:Adonis/Core/Route": [
+        "node_modules/@adonisjs/core/build/standalone/Route.d.ts"
+      ],
+      "@ioc:Adonis/Lucid/Orm": [
+        "node_modules/@adonisjs/lucid/build/src/Orm/index.d.ts"
+      ],
+      "#app/*": [
+        "./app/*"
+      ],
+      "#models/*": [
+        "./app/Models/*"
+      ],
+      "#controllers/*": [
+        "./app/Controllers/*"
+      ]
     }
   },
-  "include": ["start", "app", "contracts", "build", "adonis.ts"]
+  "include": [
+    "start",
+    "app",
+    "contracts",
+    "build",
+    "adonis.ts"
+  ]
 }

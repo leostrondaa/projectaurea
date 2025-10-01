@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, HasOne, BelongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, hasOne} from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import Papel from './papel.js'
@@ -52,9 +53,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   // Relacionamentos
-  @BelongsTo(() => Papel, { foreignKey: 'papel_id' })
+  @belongsTo(() => Papel, { foreignKey: 'user_id' })
   declare papel: BelongsTo<typeof Papel>
 
-  @HasOne(() => Conta, { foreignKey: 'user_id' })
+  @hasOne(() => Conta, { foreignKey: 'user_id' })
   declare conta: HasOne<typeof Conta>
 }

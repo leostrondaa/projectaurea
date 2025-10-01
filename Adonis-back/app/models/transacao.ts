@@ -1,4 +1,6 @@
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo} from '@adonisjs/lucid/orm'
+import type { BelongsTo} from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 import Conta from './conta.js'
 
 export default class Transacao extends BaseModel {
@@ -18,7 +20,7 @@ export default class Transacao extends BaseModel {
   declare descricao: string
 
   @column.dateTime({ autoCreate: true })
-  declare createdAt: Date
+    declare createdAt: DateTime
 
   @belongsTo(() => Conta, { foreignKey: 'conta_id' })
   declare conta: BelongsTo<typeof Conta>
