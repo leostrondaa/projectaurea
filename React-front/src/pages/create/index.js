@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { Container } from './style';
-import FormLogin from '../../components/formlogin';
+import FormSignin from '../../components/formsignin';
 import ImageLogin from '../../components/imagelogin';
 import { Client } from '../../api/client'
 import { OrbitProgress } from "react-loading-indicators";
 
-export default function Login() {
+export default function Signin() {
 
     const navigate = useNavigate();
     const [load, setLoad] = useState(true)
@@ -14,6 +14,7 @@ export default function Login() {
     function fetchData() {
 
         setLoad(true)
+        
         setTimeout(() => {
             Client.get('/auth/me').then(res => {
                 navigate('/cursos')
@@ -48,8 +49,7 @@ export default function Login() {
             </Container>
             :
             <Container>
-                <FormLogin />
-                <ImageLogin />
+                <FormSignin />
             </Container>
     )
 }

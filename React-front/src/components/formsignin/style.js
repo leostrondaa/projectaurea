@@ -29,7 +29,7 @@ export const Label = styled.label`
     margin-bottom: 5px;
 `;
 
-export const InputEmail = styled.input.attrs({ type: 'email' })`
+export const InputTop = styled.input`
     display: inline-block;
     width: 90%;
     height: 30px;
@@ -41,11 +41,10 @@ export const InputEmail = styled.input.attrs({ type: 'email' })`
         outline: none;
         background-color: rgba(255, 255, 255, 0.55);
         transition: all 0.1s ease-in-out;
-        border: 2px solid gray;
     } 
 `
 
-export const InputPassword = styled.input.attrs({ type: 'password' })`
+export const InputBottom = styled.input`
     display: inline-block;
     width: 90%;
     height: 30px;
@@ -58,7 +57,6 @@ export const InputPassword = styled.input.attrs({ type: 'password' })`
         outline: none;
         background-color: rgba(255, 255, 255, 0.55);
         transition: all 0.1s ease-in-out;
-        border: 2px solid gray;
     } 
 `
 

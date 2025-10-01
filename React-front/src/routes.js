@@ -9,6 +9,7 @@ import CursosEdit from './pages/cursos/edit'
 import Disciplinas from './pages/disciplinas'
 import DisciplinasCreate from './pages/disciplinas/create'
 import DisciplinasEdit from './pages/disciplinas/edit'
+import Create from "./pages/create"
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: "/login", 
         element: <Login />,
+    },
+    {
+        path: "/create", 
+        element: <Create />,
     },
     {
         path: "/error", 
