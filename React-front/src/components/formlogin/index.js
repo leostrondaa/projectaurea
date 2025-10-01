@@ -27,7 +27,7 @@ export default function FormLogin() {
     const [view, setView] = useState(false)
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
-
+// TESTE
     function Authenticate() {
 
         const user = { email: email, password: password }
