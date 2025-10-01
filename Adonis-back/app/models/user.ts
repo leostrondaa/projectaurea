@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, HasOne, BelongsTo } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Papel from '#models/papel'
+import Papel from './papel.js'
+import Conta from './conta.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -28,21 +28,33 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare papel_id: number
 
+  @column()
+  declare cpf: string
+
+  @column()
+  declare cidade: string
+
+  @column()
+  declare estado: string
+
+  @column()
+  declare rua: string
+
+  @column()
+  declare numero: string
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 
-  /*
-      DbAccessTokensProvider é um serviço (ou "provider") fornecido pelo
-      AdonisJS para lidar com tokens de acesso que são persistidos em um
-      banco de dados. Ele contém a lógica interna para criar, buscar
-      e gerenciar os tokens.
-  */
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   // Relacionamentos
-  @belongsTo(() => Papel, { foreignKey: 'curso_id' })
+  @BelongsTo(() => Papel, { foreignKey: 'papel_id' })
   declare papel: BelongsTo<typeof Papel>
+
+  @HasOne(() => Conta, { foreignKey: 'user_id' })
+  declare conta: HasOne<typeof Conta>
 }
