@@ -15,10 +15,9 @@ import {
 } from "./style";
 
 export default function FormSignin() {
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [street, setStreet] = useState("");
-  const [houseNumber, setHouseNumber] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [load, setLoad] = useState(false);
   const [view, setView] = useState(false);
@@ -26,15 +25,18 @@ export default function FormSignin() {
 
   function Authenticate() {
     const user = {
-      cidade: city,
-      estado: state,
-      rua: street,
-      numero: houseNumber,
+      nome: name,
+      email: email,
+      senha: password,
     };
     setView(false);
 
-    if (!city || !state || !street || !houseNumber) {
+    if (!name || !email || !password) {
       setView(1);
+    } else if (password.length < 6) {
+      setView(2);
+    } else if (email.length < 7) {
+      setView(3);
     } else {
       setLoad(true);
       setTimeout(() => {
@@ -43,7 +45,7 @@ export default function FormSignin() {
             navigate("/login");
           })
           .catch(function (error) {
-            setView(2);
+            setView(4);
             console.log(error);
           })
           .finally(() => {
@@ -55,8 +57,9 @@ export default function FormSignin() {
 
   return (
     <Container>
-      <Title>Informe seu</Title>
-      <Title>endereço</Title>
+      <Title>Estamos </Title>
+      <Title>quase lá</Title>
+
       {load ? (
         <Orbit>
           <OrbitProgress
@@ -73,36 +76,30 @@ export default function FormSignin() {
       ) : (
         <>
           <InputTop
-            id="city"
-            name="city"
-            placeholder="Cidade"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            id="name"
+            name="name"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <InputTop
-            id="state"
-            name="state"
-            placeholder="Estado"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-
-          <InputTop
-            id="street"
-            name="street"
-            placeholder="Rua"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <InputBottom
-            id="house_number"
-            name="house_number"
-            placeholder="Número da residência"
-            value={houseNumber}
-            onChange={(e) => setHouseNumber(e.target.value)}
+            id="password"
+            name="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+          <small>(min. 3 letras e 3 numeros)</small>
+          <hr></hr>
 
           {view === 1 && (
             <MsgBox>
@@ -111,14 +108,24 @@ export default function FormSignin() {
           )}
           {view === 2 && (
             <MsgBox>
-              <p>Dados incestos</p>
+              <p>Crie uma senha mais forte</p>
+            </MsgBox>
+          )}
+          {view === 3 && (
+            <MsgBox>
+              <p>Email inválido</p>
+            </MsgBox>
+          )}
+          {view === 4 && (
+            <MsgBox>
+              <p>Erro</p>
             </MsgBox>
           )}
 
           <SendBox>
-            <Submit value="Próximo" onClick={() => navigate("/create2")} />
-            <CreateButton onClick={() => navigate("/login")}>
-              Voltar
+            <Submit value="Próximo" onClick={() => Authenticate()} />
+            <CreateButton onClick={() => navigate("/create")}>
+              Anterior
             </CreateButton>
           </SendBox>
         </>

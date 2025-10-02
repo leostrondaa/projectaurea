@@ -10,7 +10,7 @@ import Disciplinas from './pages/disciplinas'
 import DisciplinasCreate from './pages/disciplinas/create'
 import DisciplinasEdit from './pages/disciplinas/edit'
 import Create from "./pages/create"
-
+import Create2 from "./pages/create2"
 
 const router = createBrowserRouter([
     { 
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: "/create", 
         element: <Create />,
+    },
+    {
+        path: "/create2", 
+        element: <Create2 />,
     },
     {
         path: "/error", 
