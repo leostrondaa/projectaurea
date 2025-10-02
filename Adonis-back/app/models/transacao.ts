@@ -4,6 +4,8 @@ import { DateTime } from 'luxon'
 import Conta from './conta.js'
 
 export default class Transacao extends BaseModel {
+  public static table = 'transacoes'
+
   @column({ isPrimary: true })
   declare id: number
 

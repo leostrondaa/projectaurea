@@ -1,9 +1,9 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import Aplicacao from '#models/investimento'
+import Investimento from '#models/investimento'
 
-export default class AplicacoesSeeder extends BaseSeeder {
+export default class InvestimentosSeeder extends BaseSeeder {
   public async run () {
-    await Aplicacao.createMany([
+    await Investimento.createMany([
       { conta_id: 1, tipo: 'poupanca', valor: 300.00 },
       { conta_id: 2, tipo: 'acoes', valor: 500.00 },
     ])

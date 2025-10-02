@@ -3,7 +3,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
 import Conta from './conta.js'
 
-export default class Aplicacao extends BaseModel {
+export default class Investimento extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
