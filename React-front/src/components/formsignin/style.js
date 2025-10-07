@@ -106,7 +106,7 @@ export const CreateButton = styled.button`
   box-sizing: border-box;
   width: 130px;
   height: 35px;
-  background-color: #000000a9;
+  background-color: #272727a9;
   color: white;
   font-size: 16px;
   font-weight: bold;

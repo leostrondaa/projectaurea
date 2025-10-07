@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import fundo from '../../images/background.png';
+import fundo from '../../images/background.jpg';
 
 export const Container = styled.div`
   background-image: url(${fundo});

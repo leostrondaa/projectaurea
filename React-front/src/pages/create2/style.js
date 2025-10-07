@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import fundo from '../../images/background.png';
 
 export const Container = styled.div`
-  background-image: url(${fundo});
   background-size: cover;
   display: flex;
   justify-content: center;

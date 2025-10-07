@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router";
-import { OrbitProgress } from "react-loading-indicators";
-import { Client, setToken } from "../../api/client";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { OrbitProgress } from 'react-loading-indicators';
+import { useLocation } from 'react-router-dom';
+import { Client, setToken } from '../../api/client';
 import {
   Container,
   Title,
@@ -12,13 +13,13 @@ import {
   Submit,
   CreateButton,
   Orbit,
-} from "./style";
+} from './style';
 
 export default function FormSignin() {
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [street, setStreet] = useState("");
-  const [houseNumber, setHouseNumber] = useState("");
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [street, setStreet] = useState('');
+  const [houseNumber, setHouseNumber] = useState('');
 
   const [load, setLoad] = useState(false);
   const [view, setView] = useState(false);
@@ -36,20 +37,8 @@ export default function FormSignin() {
     if (!city || !state || !street || !houseNumber) {
       setView(1);
     } else {
-      setLoad(true);
-      setTimeout(() => {
-        Client.post("users", user)
-          .then((res) => {
-            navigate("/login");
-          })
-          .catch(function (error) {
-            setView(2);
-            console.log(error);
-          })
-          .finally(() => {
-            setLoad(false);
-          });
-      }, 1000);
+      console.log(user);
+      navigate('/create2', { state: { user } });
     }
   }
 
@@ -66,7 +55,7 @@ export default function FormSignin() {
             text=""
             style={{
               background:
-                "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
             }}
           />
         </Orbit>
@@ -116,8 +105,8 @@ export default function FormSignin() {
           )}
 
           <SendBox>
-            <Submit value="Próximo" onClick={() => navigate("/create2")} />
-            <CreateButton onClick={() => navigate("/login")}>
+            <Submit value="Próximo" onClick={() => navigate('/create2')} />
+            <CreateButton onClick={() => navigate('/login')}>
               Voltar
             </CreateButton>
           </SendBox>

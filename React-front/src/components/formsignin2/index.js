@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router";
-import { OrbitProgress } from "react-loading-indicators";
-import { Client, setToken } from "../../api/client";
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { OrbitProgress } from 'react-loading-indicators';
+import { Client, setToken } from '../../api/client';
+import { useLocation } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -12,16 +13,19 @@ import {
   Submit,
   CreateButton,
   Orbit,
-} from "./style";
+} from './style';
 
 export default function FormSignin() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [load, setLoad] = useState(false);
   const [view, setView] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { user: prevUser } = location.state || {};
 
   function Authenticate() {
     const user = {
@@ -29,6 +33,12 @@ export default function FormSignin() {
       email: email,
       senha: password,
     };
+    console.log(user);
+
+    if (!user) {
+      console.log(user);
+      return <p>Nenhum dado recebido </p>;
+    }
     setView(false);
 
     if (!name || !email || !password) {
@@ -40,17 +50,13 @@ export default function FormSignin() {
     } else {
       setLoad(true);
       setTimeout(() => {
-        Client.post("users", user)
-          .then((res) => {
-            navigate("/login");
-          })
-          .catch(function (error) {
+        Client.post('users', user)
+          .then(() => navigate('/login'))
+          .catch((error) => {
             setView(4);
-            console.log(error);
+            console.error(error);
           })
-          .finally(() => {
-            setLoad(false);
-          });
+          .finally(() => setLoad(false));
       }, 1000);
     }
   }
@@ -69,7 +75,7 @@ export default function FormSignin() {
             text=""
             style={{
               background:
-                "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
             }}
           />
         </Orbit>
@@ -123,8 +129,8 @@ export default function FormSignin() {
           )}
 
           <SendBox>
-            <Submit value="Próximo" onClick={() => Authenticate()} />
-            <CreateButton onClick={() => navigate("/create")}>
+            <Submit value="Próximo" onClick={() => navigate('/login')} />
+            <CreateButton onClick={() => navigate('/create')}>
               Anterior
             </CreateButton>
           </SendBox>
