@@ -2,11 +2,10 @@ import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { Container, Left, Orbit, Right } from './style';
 import DataTable1 from '../../components/datatable';
-import DataTable2 from '../../components/datatable2';
+import PaymentTable from '../../components/paymenttable';
 import { Client } from '../../api/client';
-import { OrbitProgress } from 'react-loading-indicators';
 
-export default function Home() {
+export default function Payment() {
   const navigate = useNavigate();
   const [load, setLoad] = useState(true);
 
@@ -37,7 +36,7 @@ export default function Home() {
         <DataTable1 />
       </Left>
       <Right>
-        <DataTable2 />
+        <PaymentTable />
       </Right>
     </Container>
   );

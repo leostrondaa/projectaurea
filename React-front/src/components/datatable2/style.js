@@ -22,6 +22,17 @@ export const ContainerLine = styled.div`
   display: flex;
   gap: 20px;
 `;
+export const Orbit = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #3c3c3cff;
+  display: flex;
+  gap: 20px;
+  padding: 5%;
+`;
 
 export const Title = styled.h1`
   font-size: 50px;
