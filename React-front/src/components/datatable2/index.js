@@ -97,9 +97,9 @@ export default function DataTable() {
             <ContainerLine>
               <Button2 onClick={ShowButton}>𖠂</Button2>
               {viewButton ? (
-                <SubTitle>R$ 300,00</SubTitle>
-              ) : (
                 <SubTitle>R$ --.--</SubTitle>
+              ) : (
+                <SubTitle>R$ 300,00</SubTitle>
               )}
             </ContainerLine>
 
