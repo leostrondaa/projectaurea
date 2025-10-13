@@ -4,6 +4,7 @@ import Login from './pages/login';
 import Home from './pages/home';
 import Create from './pages/create';
 import Create2 from './pages/create2';
+import Payment from './pages/payment';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />,
+  },
+  {
+    path: '/payment',
+    element: <Payment />,
   },
 ]);
 

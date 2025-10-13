@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { OrbitProgress } from 'react-loading-indicators';
 import IconPig from '../../images/pig.png';
@@ -17,12 +17,13 @@ import {
   Button4,
   ContainerLine,
   Container2,
+  Orbit,
 } from './style';
 
 export default function DataTable() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
   const navigate = useNavigate();
@@ -70,7 +71,24 @@ export default function DataTable() {
     }, 1000);
   }
 
-  return (
+  useEffect(() => {
+    Authenticate();
+  }, []);
+
+  return load ? (
+    <Orbit>
+      <OrbitProgress
+        variant="spokes"
+        color="#cf5387"
+        size="small"
+        text=""
+        style={{
+          background:
+            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+        }}
+      />
+    </Orbit>
+  ) : (
     <>
       <Container>
         {viewContainer ? (
@@ -96,7 +114,7 @@ export default function DataTable() {
       </Container>
       <Container>
         <ContainerLine>
-          <Button4>
+          <Button4 onClick={() => navigate('/payment')}>
             ❖<span>Pix</span>
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
