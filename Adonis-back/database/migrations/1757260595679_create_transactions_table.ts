@@ -14,7 +14,7 @@ export default class Transacoes extends BaseSchema {
         .inTable('contas')
         .onDelete('CASCADE')
 
-      table.enum('tipo', ['deposito', 'saque', 'transferencia', 'aplicacao']).notNullable()
+      table.enum('tipo', ['deposito', 'saque', 'transferencia', 'aplicacao acoes', 'aplicacao poupanca', 'aplicacao titulos', 'resgate acoes', 'resgate poupanca', 'resgate titulos']).notNullable()
       table.decimal('valor', 15, 2).notNullable()
       table.string('descricao').nullable()
 
