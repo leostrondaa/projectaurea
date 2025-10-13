@@ -13,7 +13,7 @@ export default class Transacao extends BaseModel {
   declare conta_id: number
 
   @column()
-  declare tipo: 'deposito' | 'saque' | 'transferencia' | 'aplicacao'
+  declare tipo: 'deposito' | 'transferencia' | 'aplicacao acoes' | 'aplicacao poupanca' | 'aplicacao titulos' | 'resgate acoes' | 'resgate poupanca' | 'resgate titulos' | 'saque'
 
   @column()
   declare valor: number
