@@ -35,8 +35,8 @@ export default function DataTable1() {
       <Title>BANIF bank</Title>
       <>
         <Button>Transferência</Button>
-        <NavDropdown title={<DropTitle text={dataUser ? dataUser.fullName : 'Visitante'} />} id="navbarScrollingDropdown" className="me-4">
-          <NavDropdown.Item href="#" className="me-5">{dataUser ? dataUser.email : 'visitante@gmail.com'}</NavDropdown.Item>
+        <NavDropdown title={<DropTitle text={dataUser.fullName} />} id="navbarScrollingDropdown" className="me-4">
+          <NavDropdown.Item href="#" className="me-5">{dataUser.email}</NavDropdown.Item>
           <NavDropdown.Item onClick={() => logout()} className="me-5">Sair</NavDropdown.Item>
         </NavDropdown>
       </>
