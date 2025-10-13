@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
-import { loginValidator, registerValidator } from '#validators/auth'
+import { loginValidator, registerValidator } from '../validators/auth.js'
 import logger from '@adonisjs/core/services/logger'
 import { permissions } from '../utils/permissoes.js'
 
@@ -47,37 +47,54 @@ export default class AuthController {
    */
   async login({ request, response }: HttpContext) {
     try {
-      const { email, password } = await request.validateUsing(loginValidator)
+      const { email, password } = await request.validateUsing(loginValidator);
 
-      logger.info(`${email} - ${password}`)
+      const user = await User.findBy('email', email);
 
-      const user = await User.verifyCredentials(email, password)
+      if (!user) {
+        return response.unauthorized({
+          message: 'Credenciais inválidas',
+        });
+      }
+
+      // Verificar credenciais
+      try {
+        await User.verifyCredentials(email, password);
+      } catch (authError) {
+        return response.unauthorized({
+          message: 'Credenciais inválidas',
+        });
+      }
 
       // Criar token de acesso
       const token = await User.accessTokens.create(user, ['*'], {
         name: 'Login Token',
         expiresIn: '30 days',
-      })
+      });
 
-      logger.info(permissions[user.papel_id])
+      const tokenValue = token.value!.release();
+      console.log('🔑 Token gerado:', tokenValue.substring(0, 20) + '...');
+
       return response.ok({
         message: 'Login realizado com sucesso',
         user: {
           id: user.id,
           fullName: user.fullName,
           email: user.email,
+          papel_id: user.papel_id,
         },
         token: {
           type: 'bearer',
-          value: token.value!.release(),
+          value: tokenValue,
           expiresAt: token.expiresAt,
         },
         permissions: { ...permissions[user.papel_id] },
-      })
+      });
     } catch (error) {
+      console.error('Stack:', error.stack);
       return response.unauthorized({
         message: 'Credenciais inválidas',
-      })
+      });
     }
   }
 
@@ -136,14 +153,14 @@ export default class AuthController {
       const tokens = await User.accessTokens.all(user)
 
       return response.ok({
-        tokens: tokens.map((token) => ({
+        tokens: tokens.map(token => ({
           name: token.name,
           type: token.type,
           abilities: token.abilities,
           lastUsedAt: token.lastUsedAt,
           expiresAt: token.expiresAt,
           createdAt: token.createdAt,
-        })),
+        }))
       })
     } catch (error) {
       return response.unauthorized({

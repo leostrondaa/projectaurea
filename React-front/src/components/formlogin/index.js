@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { OrbitProgress } from 'react-loading-indicators';
 import UserContext from '../../contexts/UserContext';
-import { Client, setToken } from '../../api/client';
+import { Client, setToken, testConnection } from '../../api/client';
 import { setPermissions } from '../../service/PermissionService';
 import { setDataUser } from '../../service/UserService';
 import {
@@ -26,32 +26,42 @@ export default function FormLogin() {
   const [view, setView] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    testConnection();
+  }, []);
+
+
   // TESTE
   function Authenticate() {
-    const user = { email: email, password: password };
-    setView(false);
-    setLoad(true);
 
+    const user = { email: email, password: password }
+
+    setView(false)
+    setLoad(true)
     setTimeout(() => {
-      Client.post('auth/login', user)
-        .then((res) => {
-          const load = res.data;
-          console.log(load);
-          setUser(load.user);
-          setDataUser(load.user);
-          setToken(load.token.value);
-          setPermissions(load.permissions);
-          navigate('/home');
-        })
+      Client.post('/auth/login', user).then(res => {
+        const load = res.data
+        console.log(load)
+        // Context
+        setUser(load.user)
+        // Local Storage
+        setDataUser(load.user)
+        setToken(load.token.value)
+        setPermissions(load.permissions)
+        navigate('/home')
+      })
         .catch(function (error) {
-          setView(true);
-          console.log(error);
+          setView(true)
+          console.log(error)
         })
         .finally(() => {
-          setLoad(false);
-        });
-    }, 1000);
+          setLoad(false)
+        })
+
+    }, 1000)
   }
+
 
   return (
     <Container>
@@ -71,39 +81,38 @@ export default function FormLogin() {
         </Orbit>
       ) : (
         <>
+          <Label>E-mail</Label>
           <InputEmail
             id="email"
             name="email"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
+          <Label>Senha</Label>
           <InputPassword
             id="password"
             name="password"
-            placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {view ? (
-            <MsgBox>
-              <p>Usuário e Senha Inválidos!</p>
-            </MsgBox>
-          ) : (
-            ''
-          )}
+          {
+            view
+              ?
+              <MsgBox>
+                <p>Usuário e Senha Inválidos!</p>
+              </MsgBox>
+              :
+              ''
+          }
 
           <SendBox>
-            <Submit value="Entrar" onClick={() => navigate('/home')} />
-
-            <LinkForgot onClick={() => navigate('/login')}>
-              {' '}
-              Esqueceu sua senha?
-            </LinkForgot>
+            <Submit value="Autenticar" onClick={() => Authenticate()} />
+            <LinkForgot onClick={() => navigate('/login')}> Esqueceu sua senha?</LinkForgot>
           </SendBox>
         </>
+
       )}
     </Container>
   );

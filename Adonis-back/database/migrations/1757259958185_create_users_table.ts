@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.string('cidade').notNullable()
       table.string('estado', 2).notNullable()
       table.string('rua').notNullable()
-      table.integer('numero').notNullable()
+      table.string('numero').notNullable()
 
       table.integer('papel_id').unsigned().references('id').inTable('papels')
 

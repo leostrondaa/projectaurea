@@ -16,7 +16,7 @@ export default function Home() {
     setTimeout(() => {
       Client.get('/auth/me')
         .then((res) => {
-          navigate('/cursos');
+          navigate('/home');    
         })
         .catch(function (error) {
           console.log(error);

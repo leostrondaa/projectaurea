@@ -23,7 +23,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare email: string
 
-  @column({ serializeAs: null })
+  @column()
   declare password: string
 
   @column()
@@ -53,7 +53,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   // Relacionamentos
-  @belongsTo(() => Papel, { foreignKey: 'user_id' })
+  @belongsTo(() => Papel, { foreignKey: 'papel_id' })
   declare papel: BelongsTo<typeof Papel>
 
   @hasOne(() => Conta, { foreignKey: 'user_id' })
