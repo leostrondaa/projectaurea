@@ -68,7 +68,7 @@ Client.interceptors.response.use(
       })
     }
 
-    if (error.response?.status === 401) {
+    /*if (error.response?.status === 401) {
       console.warn('Token inválido ou expirado. Redirecionando para login...')
       removeToken()
       
@@ -78,7 +78,7 @@ Client.interceptors.response.use(
           window.location.href = '/login'
         }, 1000)
       }
-    }
+    }*/
 
     return Promise.reject(error)
   }

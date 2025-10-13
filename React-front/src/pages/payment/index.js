@@ -15,9 +15,9 @@ export default function Payment() {
     setTimeout(() => {
       Client.get('/auth/me')
         .then((res) => {
-          navigate('/cursos');
         })
         .catch(function (error) {
+          navigate('/login');
           console.log(error);
         })
         .finally(() => {

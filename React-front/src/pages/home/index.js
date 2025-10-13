@@ -15,10 +15,10 @@ export default function Home() {
 
     setTimeout(() => {
       Client.get('/auth/me')
-        .then((res) => {
-          navigate('/home');    
+        .then((res) => {    
         })
         .catch(function (error) {
+          navigate('/login');
           console.log(error);
         })
         .finally(() => {
