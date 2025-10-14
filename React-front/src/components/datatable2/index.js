@@ -23,6 +23,7 @@ import {
 export default function DataTable() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [saldo, setSaldo] = useState(null);
   const [load, setLoad] = useState(true);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
@@ -30,51 +31,31 @@ export default function DataTable() {
   const { setUser } = useContext(UserContext);
 
   function ShowContainer() {
-    setViewContainer(true);
-
-    if (viewContainer === true) {
-      setViewContainer(false);
-    }
+    setViewContainer(!viewContainer);
   }
 
   function ShowButton() {
-    setViewButton(true);
-
-    if (viewButton === true) {
-      setViewButton(false);
-    }
+    setViewButton(!viewButton);
   }
 
-  function Authenticate() {
-    const user = { email: email, password: password };
-    setViewButton(false);
-    setLoad(true);
-
-    setTimeout(() => {
-      Client.post('auth/login', user)
-        .then((res) => {
-          const load = res.data;
-          console.log(load);
-          setUser(load.user);
-          setDataUser(load.user);
-          setToken(load.token.value);
-          setPermissions(load.permissions);
-          navigate('/home');
-        })
-        .catch(function (error) {
-          setViewButton(true);
-          console.log(error);
-        })
-        .finally(() => {
-          setLoad(false);
-        });
-    }, 1000);
+  function getSaldoReal() {
+    Client.get('/conta/saldo')
+      .then((res) => {
+        console.log('Saldo real:', res.data.saldo);
+        setSaldo(res.data.saldo);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar saldo:', error);
+      });
   }
 
   useEffect(() => {
-    Authenticate();
-  }, []);
+    if (!load) {
+      getSaldoReal();
+    }
+  }, [load]);
 
+  // Renderização
   return load ? (
     <Orbit>
       <OrbitProgress
@@ -99,7 +80,11 @@ export default function DataTable() {
               {viewButton ? (
                 <SubTitle>R$ --.--</SubTitle>
               ) : (
-                <SubTitle>R$ 300,00</SubTitle>
+                <SubTitle>
+                  {saldo !== null
+                    ? `R$ ${saldo.toFixed(2).replace('.', ',')}`
+                    : 'Carregando...'}
+                </SubTitle>
               )}
             </ContainerLine>
 
@@ -112,14 +97,23 @@ export default function DataTable() {
           </>
         )}
       </Container>
+
       <Container>
         <ContainerLine>
           <Button4 onClick={() => navigate('/payment')}>
             ❖<span>Pix</span>
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
-          <Button3 onClick={()=> navigate('/application')}>
-            <img src={IconBank} />
+          <Button3>
+            <img src={IconPig} alt="Poupança" />
+            <span>Poupança</span>
+          </Button3>
+        </ContainerLine>
+
+        <ContainerLine>
+          <Button3 style={{ visibility: 'hidden' }} />
+          <Button3>
+            <img src={IconBank} alt="Aplicações" />
             <span>Aplicações</span>
           </Button3>
         </ContainerLine>
