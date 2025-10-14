@@ -98,20 +98,24 @@ export default function DataTable() {
         <Title>Users</Title>
         {/*fazer um map aqui pra cada usuario ser um container*/}
         <UsersListContainer>
-          <UserButton onclick={()=> setLoad(true)}>
+          <UserButton onclick={() => setLoad(true)}>
             <UserAvatar></UserAvatar>
             <UserInfo>
-              <UserName>pedro</UserName>
-              <UserEmail>pedro@gmail.com</UserEmail>
+              <UserName> pedro</UserName>
             </UserInfo>
-          </UserButton>   
+            <UserInfo>
+              <UserName> pedro</UserName>
+            </UserInfo>
+            <UserInfo>
+              <UserName> pedro</UserName>
+            </UserInfo>
+            <UserInfo>
+              <UserName> pedro</UserName>
+            </UserInfo>
+          </UserButton>
         </UsersListContainer>
         <Button>Voltar</Button>
       </Container>
-      
-        <Container>nigwerqvby2134tf</Container>
-  
-      
     </>
   );
 }

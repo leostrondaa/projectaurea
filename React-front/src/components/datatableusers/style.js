@@ -7,7 +7,7 @@ export const Container = styled.div`
   gap: 20px;
   padding: 5%;
   min-height: 100vh;
-  min-width: 50%;
+  min-width: 100%;
 `;
 export const Container2 = styled.div`
   background-color: rgba(38, 38, 38, 1);
@@ -150,18 +150,15 @@ export const UserAvatar = styled.div`
 `;
 // Informações do usuário
 export const UserInfo = styled.div`
-  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 100px;
+  
 `;
 
 export const UserName = styled.div`
   font-weight: bold;
   font-size: 16px;
-`;
-
-export const UserEmail = styled.div`
-  font-size: 12px;
-  color: #ccc;
-  margin-top: 2px;
 `;
 
 // Container principal com scroll
