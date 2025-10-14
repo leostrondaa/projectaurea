@@ -118,8 +118,7 @@ export default function DataTable() {
             ❖<span>Pix</span>
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
-          <Button3 style={{ visibility: 'hidden' }} />
-          <Button3>
+          <Button3 onClick={()=> navigate('/application')}>
             <img src={IconBank} />
             <span>Aplicações</span>
           </Button3>
