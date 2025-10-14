@@ -119,14 +119,6 @@ export default function DataTable() {
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
           <Button3>
-            <img src={IconPig} />
-            <span>Poupança</span>
-          </Button3>
-          *
-        </ContainerLine>
-        <ContainerLine>
-          <Button3 style={{ visibility: 'hidden' }} />
-          <Button3>
             <img src={IconBank} />
             <span>Aplicações</span>
           </Button3>

@@ -93,7 +93,7 @@ export const Button2 = styled.button`
 export const Button3 = styled.button`
   box-sizing: border-box;
   width: 200px;
-  height: 200px;
+  height: 430px;
   background-color: #1e1e1ecb;
   color: white;
   font-size: 70px;
@@ -107,18 +107,13 @@ export const Button3 = styled.button`
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    height: 230px;
     background-color: #101010cb;
     transition: all 0.2s ease-in-out;
-  }
-  img {
-    width: 70px;
-    height: 70px;
   }
 
   span {
     position: absolute;
-    bottom: -30px; /* começa fora do botão */
+    bottom: 100px; /* começa fora do botão */
     left: 50%;
     transform: translateX(-50%);
     font-size: 16px;
@@ -127,7 +122,7 @@ export const Button3 = styled.button`
   }
 
   &:hover span {
-    bottom: 15px;
+    bottom: 115px;
     opacity: 1;
   }
 `;

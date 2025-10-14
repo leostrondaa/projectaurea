@@ -34,7 +34,6 @@ export default function DataTable1() {
     <Container>
       <Title>BANIF bank</Title>
       <>
-        <Button>Transferência</Button>
         <NavDropdown title={<DropTitle text={dataUser.fullName} />} id="navbarScrollingDropdown" className="me-4">
           <NavDropdown.Item href="#" className="me-5">{dataUser.email}</NavDropdown.Item>
           <NavDropdown.Item onClick={() => logout()} className="me-5">Sair</NavDropdown.Item>
