@@ -26,6 +26,17 @@ export default class UsersSeeder extends BaseSeeder {
         numero: '200',
         papel_id: 2,
       },
+      {
+        fullName: 'Rhuan Souza',
+        email: 'rhaunzito@gmail.com',
+        password: '123456',
+        cpf: '12312312312',
+        cidade: 'Paranaguá',
+        estado: 'PR',
+        rua: 'Rua C',
+        numero: '300',
+        papel_id: 1,
+      },
     ])
   }
 }
