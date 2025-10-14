@@ -4,9 +4,7 @@ import { OrbitProgress } from 'react-loading-indicators';
 import IconPig from '../../images/pig.png';
 import IconBank from '../../images/bank.png';
 import UserContext from '../../contexts/UserContext';
-import { Client, setToken } from '../../api/client';
-import { setPermissions } from '../../service/PermissionService';
-import { setDataUser } from '../../service/UserService';
+import { Client } from '../../api/client';
 import {
   Container,
   Title,
@@ -21,74 +19,61 @@ import {
 } from './style';
 
 export default function DataTable() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [saldo, setSaldo] = useState(null);
   const [load, setLoad] = useState(true);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
+  // Mostrar/ocultar container
   function ShowContainer() {
-    setViewContainer(true);
-
-    if (viewContainer === true) {
-      setViewContainer(false);
-    }
+    setViewContainer(!viewContainer);
   }
 
+  // Mostrar/ocultar saldo
   function ShowButton() {
-    setViewButton(true);
+    setViewButton(!viewButton);
+  }
 
-    if (viewButton === true) {
-      setViewButton(false);
+  // Buscar saldo real do usuário
+  async function getSaldoReal() {
+    try {
+      const res = await Client.get('/conta/saldo');
+      console.log('Saldo real:', res.data.saldo);
+      
+      setSaldo(res.data.saldo);
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    } finally {
+      setLoad(false);
     }
   }
 
-  function Authenticate() {
-    const user = { email: email, password: password };
-    setViewButton(false);
-    setLoad(true);
-
-    setTimeout(() => {
-      Client.post('auth/login', user)
-        .then((res) => {
-          const load = res.data;
-          console.log(load);
-          setUser(load.user);
-          setDataUser(load.user);
-          setToken(load.token.value);
-          setPermissions(load.permissions);
-          navigate('/home');
-        })
-        .catch(function (error) {
-          setViewButton(true);
-          console.log(error);
-        })
-        .finally(() => {
-          setLoad(false);
-        });
-    }, 1000);
-  }
-
+  // Buscar saldo ao montar o componente
   useEffect(() => {
-    Authenticate();
+    getSaldoReal();
   }, []);
 
-  return load ? (
-    <Orbit>
-      <OrbitProgress
-        variant="spokes"
-        color="#cf5387"
-        size="small"
-        text=""
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        }}
-      />
-    </Orbit>
-  ) : (
+  // Renderização condicional
+  if (load) {
+    return (
+      <Orbit>
+        <OrbitProgress
+          variant="spokes"
+          color="#cf5387"
+          size="small"
+          text=""
+          style={{
+            background:
+              'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+          }}
+        />
+      </Orbit>
+    );
+  }
+
+  return (
     <>
       <Container>
         {viewContainer ? (
@@ -99,7 +84,11 @@ export default function DataTable() {
               {viewButton ? (
                 <SubTitle>R$ --.--</SubTitle>
               ) : (
-                <SubTitle>R$ 300,00</SubTitle>
+                <SubTitle>
+                  {saldo !== null
+                    ? `R$ ${saldo.toFixed(2).replace('.', ',')}`
+                    : 'Carregando...'}
+                </SubTitle>
               )}
             </ContainerLine>
 
@@ -112,6 +101,7 @@ export default function DataTable() {
           </>
         )}
       </Container>
+
       <Container>
         <ContainerLine>
           <Button4 onClick={() => navigate('/payment')}>
@@ -119,7 +109,19 @@ export default function DataTable() {
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
           <Button3>
+<<<<<<< HEAD
             <img src={IconBank} />
+=======
+            <img src={IconPig} alt="Poupança" />
+            <span>Poupança</span>
+          </Button3>
+        </ContainerLine>
+
+        <ContainerLine>
+          <Button3 style={{ visibility: 'hidden' }} />
+          <Button3>
+            <img src={IconBank} alt="Aplicações" />
+>>>>>>> f14e4a25408aa69ccf9fa63ad69207e6f699818d
             <span>Aplicações</span>
           </Button3>
         </ContainerLine>
