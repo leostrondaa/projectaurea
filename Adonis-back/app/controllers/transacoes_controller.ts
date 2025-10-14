@@ -53,8 +53,9 @@ export default class TransacaoController {
         }
 
         
-        remetente.saldo -= valor
-        destinatario.saldo += valor
+        remetente.saldo = Number(remetente.saldo) - valor
+        destinatario.saldo = Number(destinatario.saldo) + valor
+
         //arrumar o destinatario saldo
 
         await remetente.save()
@@ -63,7 +64,7 @@ export default class TransacaoController {
         await Transacao.create({
             conta_id: remetente.id,
             tipo: 'transferencia',
-            valor: valor,
+            valor: -valor,
             descricao: `Transferência para conta ${destinatario.numero}`,
         })
 
