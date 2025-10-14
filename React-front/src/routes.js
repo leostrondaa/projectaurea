@@ -6,6 +6,7 @@ import Create from './pages/create';
 import Create2 from './pages/create2';
 import Payment from './pages/payment';
 import Application from './pages/application';
+import Admin from './pages/admin';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: '/application',
     element: <Application />,
+  },
+  {
+    path: '/admin',
+    element: <Admin />,
   },
 ]);
 

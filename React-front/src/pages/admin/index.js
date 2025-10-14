@@ -2,10 +2,11 @@ import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { Container, Left, Orbit, Right } from './style';
 import DataTable1 from '../../components/datatable';
+import DataTableAdmin from '../../components/datatableadmin';
 import { Client } from '../../api/client';
-import ApplicationTable from '../../components/applicationtable';
+import { OrbitProgress } from 'react-loading-indicators';
 
-export default function Application() {
+export default function Home() {
   const navigate = useNavigate();
   const [load, setLoad] = useState(true);
 
@@ -14,7 +15,7 @@ export default function Application() {
 
     setTimeout(() => {
       Client.get('/auth/me')
-        .then((res) => {
+        .then((res) => {    
         })
         .catch(function (error) {
           navigate('/login');
@@ -36,7 +37,7 @@ export default function Application() {
         <DataTable1 />
       </Left>
       <Right>
-        <ApplicationTable />
+        <DataTableAdmin />
       </Right>
     </Container>
   );

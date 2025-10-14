@@ -59,18 +59,6 @@ export default function ApplicationTable() {
   return (
     <>
           <Container>
-            <Title>Aplicações</Title>
-            <InputValue
-              type="text"
-              value={'R$ ' + value}
-              onChange={(e) => {
-                const text = e.target.value.replace(/^R\$\s*/, '');
-                setValue(text);
-              }}
-            />
-            <Button onClick={() => { navigate('/home'); aplicacao(); }}>Confirmar</Button>
-          </Container>
-          <Container>
             <ContainerLine>
               <Button4 onClick={() => navigate('/home')}>
                 <span>Voltar</span>
