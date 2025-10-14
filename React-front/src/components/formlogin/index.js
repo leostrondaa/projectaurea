@@ -34,23 +34,29 @@ export default function FormLogin() {
 
   // TESTE
   function Authenticate() {
-
     const user = { email: email, password: password }
 
     setView(false)
     setLoad(true)
+
     setTimeout(() => {
-      Client.post('/auth/login', user).then(res => {
-        const load = res.data
-        console.log(load)
-        // Context
-        setUser(load.user)
-        // Local Storage
-        setDataUser(load.user)
-        setToken(load.token.value)
-        setPermissions(load.permissions)
-        navigate('/home')
-      })
+      Client.post('/auth/login', user)
+        .then(res => {
+          const load = res.data
+          console.log(load)
+          setUser(load.user)
+          setDataUser(load.user)
+          setToken(load.token.value)
+          setPermissions(load.permissions)
+
+          if (load.user.papel_id === 1) {
+            navigate('/admin')  
+          } else if (load.user.papel_id === 2) {
+            navigate('/home') 
+          } else {
+            alert('Login invalido');
+          }
+        })
         .catch(function (error) {
           setView(true)
           console.log(error)
@@ -58,9 +64,9 @@ export default function FormLogin() {
         .finally(() => {
           setLoad(false)
         })
-
     }, 1000)
   }
+
 
 
   return (

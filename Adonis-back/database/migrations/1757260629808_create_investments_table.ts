@@ -13,8 +13,6 @@ export default class Investimentos extends BaseSchema {
         .references('id')
         .inTable('contas')
         .onDelete('CASCADE')
-
-      table.enum('tipo', ['poupanca', 'titulo_governo', 'acoes']).notNullable()
       table.decimal('valor', 15, 2).notNullable()
 
       table.timestamp('created_at', { useTz: true }).notNullable()
