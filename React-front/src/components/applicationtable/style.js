@@ -15,12 +15,8 @@ export const Container2 = styled.div`
   border-radius: 10px;
   flex-direction: column;
   gap: 20px;
-  height: 530px;
+  height: 300px;
   width: 100%;
-`;
-export const ContainerLine = styled.div`
-  display: flex;
-  gap: 20px;
 `;
 export const Orbit = styled.div`
   display: flex;
@@ -33,15 +29,14 @@ export const Orbit = styled.div`
   gap: 20px;
   padding: 5%;
 `;
+export const ContainerLine = styled.div`
+  display: flex;
+  gap: 20px;
+`;
 
 export const Title = styled.h1`
   font-size: 50px;
   margin-left: 20px;
-  color: #c0c0c0ff;
-`;
-
-export const SubTitle = styled.h1`
-  margin-bottom: 10%;
   color: #c0c0c0ff;
 `;
 
@@ -57,7 +52,7 @@ export const Label = styled.label`
 export const Button = styled.button`
   box-sizing: border-box;
   width: 100%;
-  height: 35px;
+  height: 50px;
   background-color: #1e1e1ecb;
   color: white;
   font-size: 16px;
@@ -72,60 +67,6 @@ export const Button = styled.button`
     transition: all 0.2s ease-in-out;
   }
 `;
-export const Button2 = styled.button`
-  box-sizing: border-box;
-  width: 10%;
-  height: 35px;
-  background-color: #1e1e1ecb;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: grab;
-
-  &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
-  }
-`;
-export const Button3 = styled.button`
-  box-sizing: border-box;
-  width: 200px;
-  height: 430px;
-  background-color: #1e1e1ecb;
-  color: white;
-  font-size: 70px;
-  font-weight: bold;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: grab;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
-  }
-
-  span {
-    position: absolute;
-    bottom: 100px; /* começa fora do botão */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover span {
-    bottom: 115px;
-    opacity: 1;
-  }
-`;
 
 export const Button4 = styled.button`
   box-sizing: border-box;
@@ -133,13 +74,11 @@ export const Button4 = styled.button`
   height: 430px;
   background-color: #1e1e1ecb;
   color: white;
-  font-size: 70px;
   font-weight: bold;
   margin-top: 10px;
   border: none;
   border-radius: 10px;
   cursor: grab;
-  position: absolute;
 
   &:hover {
     background-color: #101010cb;
@@ -147,17 +86,41 @@ export const Button4 = styled.button`
   }
 
   span {
-    position: absolute;
-    bottom: 100px; /* começa fora do botão */
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 16px;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
   }
+`;
 
-  &:hover span {
-    bottom: 115px;
-    opacity: 1;
+export const InputKey = styled.input`
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  margin-top: 30px;
+  padding: 10px;
+
+  &:hover {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.55);
+    transition: all 0.1s ease-in-out;
+    border: 2px solid gray;
+  }
+`;
+
+export const InputValue = styled.input`
+  display: inline-block;
+  width: 100%;
+  height: 100px;
+  font-size: 30px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  margin-top: 30px;
+  padding: 10px;
+
+  &:hover {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.55);
+    transition: all 0.1s ease-in-out;
+    border: 2px solid gray;
   }
 `;

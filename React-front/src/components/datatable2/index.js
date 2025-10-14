@@ -4,7 +4,9 @@ import { OrbitProgress } from 'react-loading-indicators';
 import IconPig from '../../images/pig.png';
 import IconBank from '../../images/bank.png';
 import UserContext from '../../contexts/UserContext';
-import { Client } from '../../api/client';
+import { Client, setToken } from '../../api/client';
+import { setPermissions } from '../../service/PermissionService';
+import { setDataUser } from '../../service/UserService';
 import {
   Container,
   Title,
@@ -19,61 +21,74 @@ import {
 } from './style';
 
 export default function DataTable() {
-  const [saldo, setSaldo] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [load, setLoad] = useState(true);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
-  // Mostrar/ocultar container
   function ShowContainer() {
-    setViewContainer(!viewContainer);
-  }
+    setViewContainer(true);
 
-  // Mostrar/ocultar saldo
-  function ShowButton() {
-    setViewButton(!viewButton);
-  }
-
-  // Buscar saldo real do usuário
-  async function getSaldoReal() {
-    try {
-      const res = await Client.get('/conta/saldo');
-      console.log('Saldo real:', res.data.saldo);
-      
-      setSaldo(res.data.saldo);
-    } catch (error) {
-      console.error('Erro ao buscar saldo:', error);
-    } finally {
-      setLoad(false);
+    if (viewContainer === true) {
+      setViewContainer(false);
     }
   }
 
-  // Buscar saldo ao montar o componente
-  useEffect(() => {
-    getSaldoReal();
-  }, []);
+  function ShowButton() {
+    setViewButton(true);
 
-  // Renderização condicional
-  if (load) {
-    return (
-      <Orbit>
-        <OrbitProgress
-          variant="spokes"
-          color="#cf5387"
-          size="small"
-          text=""
-          style={{
-            background:
-              'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-          }}
-        />
-      </Orbit>
-    );
+    if (viewButton === true) {
+      setViewButton(false);
+    }
   }
 
-  return (
+  function Authenticate() {
+    const user = { email: email, password: password };
+    setViewButton(false);
+    setLoad(true);
+
+    setTimeout(() => {
+      Client.post('auth/login', user)
+        .then((res) => {
+          const load = res.data;
+          console.log(load);
+          setUser(load.user);
+          setDataUser(load.user);
+          setToken(load.token.value);
+          setPermissions(load.permissions);
+          navigate('/home');
+        })
+        .catch(function (error) {
+          setViewButton(true);
+          console.log(error);
+        })
+        .finally(() => {
+          setLoad(false);
+        });
+    }, 1000);
+  }
+
+  useEffect(() => {
+    Authenticate();
+  }, []);
+
+  return load ? (
+    <Orbit>
+      <OrbitProgress
+        variant="spokes"
+        color="#cf5387"
+        size="small"
+        text=""
+        style={{
+          background:
+            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+        }}
+      />
+    </Orbit>
+  ) : (
     <>
       <Container>
         {viewContainer ? (
@@ -84,11 +99,7 @@ export default function DataTable() {
               {viewButton ? (
                 <SubTitle>R$ --.--</SubTitle>
               ) : (
-                <SubTitle>
-                  {saldo !== null
-                    ? `R$ ${saldo.toFixed(2).replace('.', ',')}`
-                    : 'Carregando...'}
-                </SubTitle>
+                <SubTitle>R$ 300,00</SubTitle>
               )}
             </ContainerLine>
 
@@ -101,23 +112,14 @@ export default function DataTable() {
           </>
         )}
       </Container>
-
       <Container>
         <ContainerLine>
           <Button4 onClick={() => navigate('/payment')}>
             ❖<span>Pix</span>
           </Button4>
           <Button3 style={{ visibility: 'hidden' }} />
-          <Button3>
-            <img src={IconPig} alt="Poupança" />
-            <span>Poupança</span>
-          </Button3>
-        </ContainerLine>
-
-        <ContainerLine>
-          <Button3 style={{ visibility: 'hidden' }} />
-          <Button3>
-            <img src={IconBank} alt="Aplicações" />
+          <Button3 onClick={()=> navigate('/application')}>
+            <img src={IconBank} />
             <span>Aplicações</span>
           </Button3>
         </ContainerLine>

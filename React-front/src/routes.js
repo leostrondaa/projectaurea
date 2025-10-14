@@ -5,6 +5,7 @@ import Home from './pages/home';
 import Create from './pages/create';
 import Create2 from './pages/create2';
 import Payment from './pages/payment';
+import Application from './pages/application';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/payment',
     element: <Payment />,
+  },
+  {
+    path: '/application',
+    element: <Application />,
   },
 ]);
 
