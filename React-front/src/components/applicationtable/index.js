@@ -68,18 +68,20 @@ export default function ApplicationTable() {
         <Button
           onClick={() => {
             navigate("/home");
-            transferir();
+            aplicacao();
           }}
         >
           Confirmar
         </Button>
-
-        <ContainerLine>
-          <Button4 onClick={() => navigate("/home")}>
-            <span>Voltar</span>
-          </Button4>
-        </ContainerLine>
+        
       </Container>
+      <Container>
+          <ContainerLine>
+            <Button4 onClick={() => navigate("/home")}>
+              <span>Voltar</span>
+            </Button4>
+          </ContainerLine>
+        </Container>
     </>
   );
 }

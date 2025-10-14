@@ -118,7 +118,7 @@ export default function DataTableAdmin() {
             ❖<span>Criar conta</span>
           </Button4>
           <Button3 style={{ visibility: "hidden" }} />
-          <Button3 onClick={() => navigate("/application")}>
+          <Button3 onClick={() => navigate("/users")}>
             <img src={IconBank} />
             <span>Usuarios</span>
           </Button3>

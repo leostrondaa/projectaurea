@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #3c3c3cff;
@@ -48,11 +48,10 @@ export const Label = styled.label`
   margin-top: 15px;
   margin-bottom: 5px;
 `;
-
 export const Button = styled.button`
   box-sizing: border-box;
   width: 100%;
-  height: 50px;
+  height: 35px;
   background-color: #1e1e1ecb;
   color: white;
   font-size: 16px;
@@ -61,32 +60,52 @@ export const Button = styled.button`
   border: none;
   border-radius: 10px;
   cursor: grab;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 `;
-
 export const Button4 = styled.button`
   box-sizing: border-box;
   width: 200px;
   height: 430px;
   background-color: #1e1e1ecb;
   color: white;
+  font-size: 70px;
   font-weight: bold;
   margin-top: 10px;
   border: none;
   border-radius: 10px;
   cursor: grab;
+  position: absolute;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 
   span {
+    position: absolute;
+    bottom: 100px; /* começa fora do botão */
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 16px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover span {
+    bottom: 115px;
+    opacity: 1;
   }
 `;
 

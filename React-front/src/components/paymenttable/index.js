@@ -130,6 +130,7 @@ export default function PaymentTable() {
               }}
             />
             <Button onClick={() => { navigate('/home'); transferir(); }}>Confirmar</Button>
+            
           </Container>
           <Container>
             <ContainerLine>

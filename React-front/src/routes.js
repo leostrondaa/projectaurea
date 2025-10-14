@@ -7,6 +7,7 @@ import Create2 from './pages/create2';
 import Payment from './pages/payment';
 import Application from './pages/application';
 import Admin from './pages/admin';
+import Users from './pages/users';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <Admin />,
+  },
+  {
+    path: '/users',
+    element: <Users />,
   },
 ]);
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #3c3c3cff;
@@ -66,10 +66,14 @@ export const Button = styled.button`
   border: none;
   border-radius: 10px;
   cursor: grab;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 `;
 export const Button2 = styled.button`
@@ -85,9 +89,14 @@ export const Button2 = styled.button`
   border-radius: 10px;
   cursor: grab;
 
+  transition: all 0.2s ease-in-out;
+
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 `;
 export const Button3 = styled.button`
@@ -104,11 +113,14 @@ export const Button3 = styled.button`
   cursor: grab;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 
   span {
@@ -140,10 +152,14 @@ export const Button4 = styled.button`
   border-radius: 10px;
   cursor: grab;
   position: absolute;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #101010cb;
-    transition: all 0.2s ease-in-out;
+    background-color: #1e1e1ecb;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 
   span {
