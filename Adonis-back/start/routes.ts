@@ -1,6 +1,8 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-import TransferenciaController from '#controllers/transferencias_controller'
+// Update the import path to match your project structure, for example:
+// Update the import path to match your project structure, for example:
+import TransacaoController from '#controllers/transacoes_controller'
 
 router.get('/health', async () => {
   return { status: 'ok', message: 'Backend funcionando' }
@@ -29,8 +31,8 @@ router.group(() => {
   // Contas
 
   // Transações
-  router.get('/transferencia/conta/:chave', [TransferenciaController, 'buscarConta'])
-  router.post('/transferencia', [TransferenciaController, 'transferir'])
+  router.get('/transacao/conta/:chave', [TransacaoController, 'buscarConta'])
+  router.post('/transacao', [TransacaoController, 'transferir'])
 
 
   // Investimentos

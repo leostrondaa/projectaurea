@@ -34,7 +34,7 @@ export default function PaymentTable() {
 
   function buscarConta() {
     setLoad(true)
-    Client.get(`/transferencia/conta/${key}`)
+    Client.get(`/transacao/conta/${key}`)
       .then((response) => {
         const conta = response.data
         console.log('Conta encontrada:', conta)
@@ -54,7 +54,7 @@ export default function PaymentTable() {
       const remetenteId = user.id
       const valorNumerico = parseFloat(value.replace(',', '.'))
 
-      const response = await Client.post('/transferencia', {
+      const response = await Client.post('/transacao', {
         remetenteId,
         destinatarioId: key,
         valor: valorNumerico,

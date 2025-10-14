@@ -2,7 +2,7 @@ import Conta from '#models/conta'
 import Transacao from '#models/transacao'
 import User from '#models/user'
 
-export default class TransferenciaController {
+export default class TransacaoController {
     async buscarConta({ params, response }) {
         const chave = params.chave
 
@@ -52,9 +52,10 @@ export default class TransferenciaController {
             return response.badRequest({ message: 'Não é possível transferir para a mesma conta' })
         }
 
+        
+        remetente.saldo -= valor
         destinatario.saldo += valor
         //arrumar o destinatario saldo
-        remetente.saldo -= valor
 
         await remetente.save()
         await destinatario.save()
