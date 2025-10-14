@@ -24,7 +24,7 @@ export default function DataTable() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [saldo, setSaldo] = useState(null);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ export default function DataTable() {
         <Title>Users</Title>
         {/*fazer um map aqui pra cada usuario ser um container*/}
         <UsersListContainer>
-          <UserButton onclick={setLoad(true)}>
+          <UserButton onclick={()=> setLoad(true)}>
             <UserAvatar></UserAvatar>
             <UserInfo>
               <UserName>pedro</UserName>
@@ -108,11 +108,9 @@ export default function DataTable() {
         </UsersListContainer>
         <Button>Voltar</Button>
       </Container>
-      {load?(
-        <Container>
-          <Button>Voltar</Button>
-        </Container>
-      ):(<Container></Container>)}
+      
+        <Container>nigwerqvby2134tf</Container>
+  
       
     </>
   );
