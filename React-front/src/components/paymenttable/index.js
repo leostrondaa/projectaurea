@@ -25,44 +25,51 @@ export default function PaymentTable() {
   const [load, setLoad] = useState(false);
   const [viewData, setViewData] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
 
   function ShowContainer() {
-    setViewContainer(true);
+    setViewContainer(prev => !prev);
+  }
 
-    if (viewContainer === true) {
-      setViewContainer(false);
+  function buscarConta() {
+    setLoad(true)
+    Client.get(`/transferencia/conta/${key}`)
+      .then((response) => {
+        const conta = response.data
+        console.log('Conta encontrada:', conta)
+        setViewData(true)
+      })
+      .catch((error) => {
+        alert('Conta não encontrada!')
+        console.error(error)
+      })
+      .finally(() => setLoad(false))
+  }
+
+
+  async function transferir() {
+    setLoad(true)
+    try {
+      const remetenteId = user.id
+      const valorNumerico = parseFloat(value.replace(',', '.'))
+
+      const response = await Client.post('/transferencia', {
+        remetenteId,
+        destinatarioId: key,
+        valor: valorNumerico,
+      })
+
+      alert(response.data.message)
+      navigate('/home')
+    } catch (error) {
+      console.error(error)
+      alert(error.response?.data?.message || 'Erro na transferência')
+    } finally {
+      setLoad(false)
     }
   }
 
-  function Authenticate() {
-    const user = { valor: value };
-    setLoad(true);
-
-    setTimeout(() => {
-      Client.post('auth/login', user)
-        .then((res) => {
-          const load = res.data;
-          console.log(load);
-          setUser(load.user);
-          setDataUser(load.user);
-          setToken(load.token.value);
-          setPermissions(load.permissions);
-          navigate('/home');
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-        .finally(() => {
-          setLoad(false);
-        });
-    }, 1000);
-  }
-
-  useEffect(() => {
-    Authenticate();
-  }, []);
 
   useEffect(() => {
     setViewData(true);
@@ -88,11 +95,11 @@ export default function PaymentTable() {
           <Container>
             <Title>Transferir</Title>
             <InputKey
-              placeholder="Chave"
+              placeholder="Chave Pix(CPF ou Email)"
               value={key}
               onChange={(e) => setKey(e.target.value)}
             />
-            <Button onClick={ShowContainer}>Confirmar</Button>
+            <Button onClick={() => { ShowContainer(); buscarConta(); }}>Confirmar</Button>
             {viewData ? (
               <Container2>
                 <Title>GAY</Title>
@@ -122,7 +129,7 @@ export default function PaymentTable() {
                 setValue(text);
               }}
             />
-            <Button onClick={() => navigate('/home')}>Confirmar</Button>
+            <Button onClick={() => { navigate('/home'); transferir(); }}>Confirmar</Button>
           </Container>
           <Container>
             <ContainerLine>

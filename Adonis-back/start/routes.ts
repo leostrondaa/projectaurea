@@ -1,11 +1,11 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import TransferenciaController from '#controllers/transferencias_controller'
 
 router.get('/health', async () => {
   return { status: 'ok', message: 'Backend funcionando' }
 })
 
-// ⬇️ SEU CÓDIGO EXISTente - NÃO MUDE NADA ABAIXO
 router.get('/', async () => {
   return {
     hello: 'world',
@@ -25,22 +25,16 @@ router.group(() => {
 router.group(() => {
   // Users
   router.resource('users', '#controllers/users_controller')
-  
+
   // Contas
-  router.resource('contas', '#controllers/contas_controller')
-  router.get('contas/:id/saldo', '#controllers/contas_controller.saldo')
-  router.get('contas/:id/extrato', '#controllers/contas_controller.extrato')
-  
+
   // Transações
-  router.resource('transacoes', '#controllers/transacoes_controller')
-  router.post('transacoes/pix', '#controllers/transacoes_controller.pix')
-  router.post('transacoes/deposito', '#controllers/transacoes_controller.deposito')
-  router.post('transacoes/saque', '#controllers/transacoes_controller.saque')
-  
+  router.get('/transferencia/conta/:chave', [TransferenciaController, 'buscarConta'])
+  router.post('/transferencia', [TransferenciaController, 'transferir'])
+
+
   // Investimentos
-  router.resource('investimentos', '#controllers/investimentos_controller')
-  router.post('investimentos/:id/resgatar', '#controllers/investimentos_controller.resgatar')
-  
+
 }).use(middleware.auth())
 
 // Rota pública boas-vindas
