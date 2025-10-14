@@ -30,14 +30,44 @@ export default function DataTable() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
+  // Função para mostrar/ocultar extrato
   function ShowContainer() {
     setViewContainer(!viewContainer);
   }
 
+  // Função para mostrar/ocultar o saldo
   function ShowButton() {
     setViewButton(!viewButton);
   }
 
+  // Função para autenticar usuário
+  function Authenticate() {
+    const user = { email: email, password: password };
+    setViewButton(false);
+    setLoad(true);
+
+    setTimeout(() => {
+      Client.post('auth/login', user)
+        .then((res) => {
+          const data = res.data;
+          console.log('Login bem-sucedido:', data);
+          setUser(data.user);
+          setDataUser(data.user);
+          setToken(data.token.value);
+          setPermissions(data.permissions);
+          navigate('/home');
+        })
+        .catch(function (error) {
+          setViewButton(true);
+          console.log('Erro no login:', error);
+        })
+        .finally(() => {
+          setLoad(false);
+        });
+    }, 1000);
+  }
+
+  // Função para buscar saldo real do usuário
   function getSaldoReal() {
     Client.get('/conta/saldo')
       .then((res) => {
@@ -49,6 +79,12 @@ export default function DataTable() {
       });
   }
 
+  // Faz login automático (ou você pode remover isso se quiser)
+  useEffect(() => {
+    Authenticate();
+  }, []);
+
+  // Quando terminar o carregamento do login, busca o saldo
   useEffect(() => {
     if (!load) {
       getSaldoReal();
