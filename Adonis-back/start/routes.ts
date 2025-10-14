@@ -2,6 +2,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import TransacaoController from '#controllers/transacoes_controller'
 import ContasController from '#controllers/contas_controller'
+import InvestimentoController from '#controllers/investimentos_controller'
 
 router.get('/health', async () => {
   return { status: 'ok', message: 'Backend funcionando' }
@@ -36,7 +37,7 @@ router.group(() => {
 
 
   // Investimentos
-
+  router.post('/investimento', [InvestimentoController, 'aplicar'])
 }).use(middleware.auth())
 
 // Rota pública boas-vindas

@@ -34,7 +34,7 @@ export default function ApplicationTable() {
       const remetenteId = user.id;
       const valorNumerico = parseFloat(value.replace(",", "."));
 
-      const response = await Client.post("/aplicacao", {
+      const response = await Client.post("/investimento", {
         remetenteId,
         valor: valorNumerico,
       });
