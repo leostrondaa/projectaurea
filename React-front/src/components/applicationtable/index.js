@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import { OrbitProgress } from 'react-loading-indicators';
-import IconPig from '../../images/pig.png';
-import IconBank from '../../images/bank.png';
-import UserContext from '../../contexts/UserContext';
-import { Client, setToken } from '../../api/client';
-import { setPermissions } from '../../service/PermissionService';
-import { setDataUser } from '../../service/UserService';
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { OrbitProgress } from "react-loading-indicators";
+import IconPig from "../../images/pig.png";
+import IconBank from "../../images/bank.png";
+import UserContext from "../../contexts/UserContext";
+import { Client, setToken } from "../../api/client";
+import { setPermissions } from "../../service/PermissionService";
+import { setDataUser } from "../../service/UserService";
 import {
   Container,
   Title,
@@ -17,54 +17,69 @@ import {
   InputKey,
   InputValue,
   Container2,
-} from './style';
+} from "./style";
 
 export default function ApplicationTable() {
-  const [key, setKey] = useState('');
-  const [value, setValue] = useState('');
+  const [key, setKey] = useState("");
   const [load, setLoad] = useState(false);
+  const [value, setValue] = useState("");
   //const [viewData, setViewData] = useState(false);
   //const [viewContainer, setViewContainer] = useState(true);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-
-
   async function aplicacao() {
-    setLoad(true)
+    setLoad(true);
     try {
-      const remetenteId = user.id
-      const valorNumerico = parseFloat(value.replace(',', '.'))
+      const remetenteId = user.id;
+      const valorNumerico = parseFloat(value.replace(",", "."));
 
-      const response = await Client.post('/aplicacao', {
+      const response = await Client.post("/aplicacao", {
         remetenteId,
         valor: valorNumerico,
-      })
+      });
 
-      alert(response.data.message)
-      navigate('/home')
+      alert(response.data.message);
+      navigate("/home");
     } catch (error) {
-      console.error(error)
-      alert(error.response?.data?.message || 'Erro na transferência')
+      console.error(error);
+      alert(error.response?.data?.message || "Erro na transferência");
     } finally {
-      setLoad(false)
+      setLoad(false);
     }
   }
 
-
   useEffect(() => {
     //setViewData(true);
-  }, );
+  });
 
   return (
     <>
-          <Container>
-            <ContainerLine>
-              <Button4 onClick={() => navigate('/home')}>
-                <span>Voltar</span>
-              </Button4>
-            </ContainerLine>
-          </Container>
-        </>
+      <Container>
+        <Title>Aplicações</Title>
+        <InputValue
+          type="text"
+          value={"R$ " + value}
+          onChange={(e) => {
+            const text = e.target.value.replace(/^R\$\s*/, "");
+            setValue(text);
+          }}
+        />
+        <Button
+          onClick={() => {
+            navigate("/home");
+            transferir();
+          }}
+        >
+          Confirmar
+        </Button>
+
+        <ContainerLine>
+          <Button4 onClick={() => navigate("/home")}>
+            <span>Voltar</span>
+          </Button4>
+        </ContainerLine>
+      </Container>
+    </>
   );
 }
