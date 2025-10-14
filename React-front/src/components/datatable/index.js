@@ -11,7 +11,7 @@ export default function DataTable1() {
   const { user } = useContext(UserContext)
   const dataUser = getDataUser()
   const navigate = useNavigate();
-
+//teste
   function logout() {
 
     setTimeout(() => {
