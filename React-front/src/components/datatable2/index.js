@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { OrbitProgress } from 'react-loading-indicators';
-import IconPig from '../../images/pig.png';
+import IconPix from '../../images/pix.png';
 import IconBank from '../../images/bank.png';
 import UserContext from '../../contexts/UserContext';
 import { Client, setToken } from '../../api/client';
@@ -14,7 +14,6 @@ import {
   Button,
   Button2,
   Button3,
-  Button4,
   ContainerLine,
   Container2,
   Orbit,
@@ -30,17 +29,14 @@ export default function DataTable() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  // Função para mostrar/ocultar extrato
   function ShowContainer() {
     setViewContainer(!viewContainer);
   }
 
-  // Função para mostrar/ocultar o saldo
   function ShowButton() {
     setViewButton(!viewButton);
   }
 
-  // Função para autenticar usuário
   function Authenticate() {
     const user = { email: email, password: password };
     setViewButton(false);
@@ -50,7 +46,6 @@ export default function DataTable() {
       Client.post('auth/login', user)
         .then((res) => {
           const data = res.data;
-          console.log('Login bem-sucedido:', data);
           setUser(data.user);
           setDataUser(data.user);
           setToken(data.token.value);
@@ -67,11 +62,9 @@ export default function DataTable() {
     }, 1000);
   }
 
-  // Função para buscar saldo real do usuário
   function getSaldoReal() {
     Client.get('/conta/saldo')
       .then((res) => {
-        console.log('Saldo real:', res.data.saldo);
         setSaldo(res.data.saldo);
       })
       .catch((error) => {
@@ -79,31 +72,19 @@ export default function DataTable() {
       });
   }
 
-  // Faz login automático (ou você pode remover isso se quiser)
   useEffect(() => {
     Authenticate();
   }, []);
 
-  // Quando terminar o carregamento do login, busca o saldo
   useEffect(() => {
     if (!load) {
       getSaldoReal();
     }
   }, [load]);
 
-  // Renderização
   return load ? (
     <Orbit>
-      <OrbitProgress
-        variant="spokes"
-        color="#cf5387"
-        size="small"
-        text=""
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        }}
-      />
+      <OrbitProgress variant="spokes" color="#ffffffff" size="small" text="" />
     </Orbit>
   ) : (
     <>
@@ -112,18 +93,24 @@ export default function DataTable() {
           <>
             <Title>Saldo</Title>
             <ContainerLine>
-              <Button2 onClick={ShowButton}>𖠂</Button2>
               {viewButton ? (
                 <SubTitle>R$ --.--</SubTitle>
               ) : (
                 <SubTitle>
-                  {saldo !== null
-                    ? `R$ ${saldo.toFixed(2).replace('.', ',')}`
-                    : 'Carregando...'}
+                  {saldo !== null ? (
+                    `R$ ${saldo.toFixed(2).replace('.', ',')}`
+                  ) : (
+                    <OrbitProgress
+                      variant="spokes"
+                      color="#ffffffff"
+                      size="small"
+                      text=""
+                    />
+                  )}
                 </SubTitle>
               )}
+              <Button2 onClick={ShowButton}>𖠂</Button2>
             </ContainerLine>
-
             <Button onClick={ShowContainer}>Consultar extrato</Button>
           </>
         ) : (
@@ -132,20 +119,16 @@ export default function DataTable() {
             <Button onClick={ShowContainer}>Ocultar extrato</Button>
           </>
         )}
-      </Container>
-
-      <Container>
         <ContainerLine>
-          <Button4 onClick={() => navigate('/payment')}>
-            ❖<span>Pix</span>
-          </Button4>
-          <Button3 style={{ visibility: 'hidden' }} />
-          <Button3 onClick={()=> navigate('/application')}>
+          <Button3 onClick={() => navigate('/payment')}>
+            <img src={IconPix} alt="Pix" />
+            <span>Pix</span>
+          </Button3>
+          <Button3 onClick={() => navigate('/application')}>
             <img src={IconBank} alt="Aplicações" />
             <span>Aplicações</span>
           </Button3>
         </ContainerLine>
-        
       </Container>
     </>
   );

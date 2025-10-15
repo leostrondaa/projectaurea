@@ -15,8 +15,7 @@ import {
   SendBox,
   Submit,
   LinkForgot,
-  CreateButton,
-  Orbit,
+  ContainerLine,
 } from './style';
 
 export default function FormLogin() {
@@ -27,66 +26,59 @@ export default function FormLogin() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    testConnection();
-  }, []);
-
-
-  // TESTE
   function Authenticate() {
-    const user = { email: email, password: password }
+    const user = { email: email, password: password };
 
-    setView(false)
-    setLoad(true)
+    setView(false);
+    setLoad(true);
 
     setTimeout(() => {
       Client.post('/auth/login', user)
-        .then(res => {
-          const load = res.data
-          console.log(load)
-          setUser(load.user)
-          setDataUser(load.user)
-          setToken(load.token.value)
-          setPermissions(load.permissions)
+        .then((res) => {
+          const load = res.data;
+          console.log(load);
+          setUser(load.user);
+          setDataUser(load.user);
+          setToken(load.token.value);
+          setPermissions(load.permissions);
 
           if (load.user.papel_id === 1) {
-            navigate('/admin')  
+            navigate('/admin');
           } else if (load.user.papel_id === 2) {
-            navigate('/home') 
+            navigate('/home');
           } else {
             alert('Login invalido');
           }
         })
         .catch(function (error) {
-          setView(true)
-          console.log(error)
+          setView(true);
+          console.log(error);
         })
         .finally(() => {
-          setLoad(false)
-        })
-    }, 1000)
+          setLoad(false);
+        });
+    }, 1000);
   }
 
-
+  useEffect(() => {
+    testConnection();
+  }, []);
 
   return (
     <Container>
-      <Title>Hello world!</Title>
+      <ContainerLine>
+        <Title>Olá!</Title>
+      </ContainerLine>
+
       {load ? (
-        <Orbit>
-          <OrbitProgress
-            variant="spokes"
-            color="#cf5387"
-            size="small"
-            text=""
-            style={{
-              background:
-                'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-            }}
-          />
-        </Orbit>
+        <OrbitProgress
+          variant="spokes"
+          color="#ffffffff"
+          size="small"
+          text=""
+        />
       ) : (
-        <>
+        <ContainerLine>
           <Label>E-mail</Label>
           <InputEmail
             id="email"
@@ -94,7 +86,6 @@ export default function FormLogin() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <Label>Senha</Label>
           <InputPassword
             id="password"
@@ -103,22 +94,23 @@ export default function FormLogin() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {
-            view
-              ?
-              <MsgBox>
-                <p>Usuário e Senha Inválidos!</p>
-              </MsgBox>
-              :
-              ''
-          }
+          {view ? (
+            <MsgBox>
+              <p>Usuário ou Senha Inválidos!</p>
+            </MsgBox>
+          ) : (
+            ''
+          )}
 
           <SendBox>
             <Submit value="Autenticar" onClick={() => Authenticate()} />
-            <LinkForgot onClick={() => navigate('/login')}> Esqueceu sua senha?</LinkForgot>
+            <LinkForgot onClick={() => navigate('/login')}>
+              Esqueceu
+              <br />
+              sua senha?
+            </LinkForgot>
           </SendBox>
-        </>
-
+        </ContainerLine>
       )}
     </Container>
   );

@@ -1,44 +1,32 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: rgba(14, 14, 14, 1);
+  background-color: rgba(0, 0, 0, 0.95);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  border-radius: 10px;
   min-height: 100vh;
+
+  border: 1px solid #ccccccff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+`;
+export const ContainerLine = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Title = styled.h1`
-  font-size: 50px;
+  font-size: 70px;
+  margin-top: 10%;
   color: white;
-  margin-bottom: 5px;
-  padding: 20px;
 `;
-
-export const Label = styled.label`
-  display: block;
-  font-size: 18px;
-  border: 10px;
-  padding: 20px;
-  margin-top: 15px;
-  margin-bottom: 5px;
+export const SubTitle = styled.h1`
+  font-size: 30px;
+  margin-bottom: 10%;
+  color: #c0c0c0ff;
 `;
-
-export const Button = styled.button`
-  box-sizing: border-box;
-  width: 100%;
-  height: 35px;
-  background-color: #272727a9;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 20px;
-  border: none;
-  cursor: grab;
-
-  &:hover {
-    background-color: #1e1e1ecb;
-    transition: all 0.2s ease-in-out;
-  }
+export const NavContainer = styled.div`
+  position: absolute;
+  bottom: 10%;
 `;

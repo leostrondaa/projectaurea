@@ -7,21 +7,23 @@ import UserContext from '../../contexts/UserContext';
 import { Client, setToken } from '../../api/client';
 import { setPermissions } from '../../service/PermissionService';
 import { setDataUser } from '../../service/UserService';
+
 import {
   Container,
   Title,
   Orbit,
   Button,
-  Button4,
   ContainerLine,
   InputKey,
   InputValue,
-  Container2,
+  Button2,
+  Label,
 } from './style';
 
 export default function PaymentTable() {
   const [key, setKey] = useState('');
   const [value, setValue] = useState('');
+  const [destinatario, setDestinatario] = useState('');
   const [load, setLoad] = useState(false);
   const [viewData, setViewData] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
@@ -29,98 +31,105 @@ export default function PaymentTable() {
   const navigate = useNavigate();
 
   function ShowContainer() {
-    setViewContainer(prev => !prev);
+    setViewContainer((prev) => !prev);
   }
 
   function buscarConta() {
-    setLoad(true)
+    setLoad(true);
     Client.get(`/transacao/conta/${key}`)
       .then((response) => {
-        const conta = response.data
-        console.log('Conta encontrada:', conta)
-        setViewData(true)
+        const conta = response.data;
+        console.log('Conta encontrada:', conta);
+        setDestinatario(conta.key);
       })
       .catch((error) => {
-        alert('Conta não encontrada!')
-        console.error(error)
+        alert('Conta não encontrada!');
+        console.error(error);
       })
-      .finally(() => setLoad(false))
+      .finally(() => setLoad(false));
   }
 
-
   async function transferir() {
-    setLoad(true)
+    setLoad(true);
     try {
-      const remetenteId = user.id
-      const valorNumerico = parseFloat(value.replace(',', '.'))
+      const remetenteId = user.id;
+      const valorNumerico = parseFloat(value.replace(',', '.'));
 
       const response = await Client.post('/transacao', {
         remetenteId,
         destinatarioId: key,
         valor: valorNumerico,
-      })
+      });
 
-      alert(response.data.message)
-      navigate('/home')
+      alert(response.data.message);
+      navigate('/home');
     } catch (error) {
-      console.error(error)
-      alert(error.response?.data?.message || 'Erro na transferência')
+      console.error(error);
+      alert(error.response?.data?.message || 'Erro na transferência');
     } finally {
-      setLoad(false)
+      setLoad(false);
     }
   }
 
-
-  useEffect(() => {
-    setViewData(true);
-  }, [key]);
-
   return load ? (
-    <Orbit>
-      <OrbitProgress
-        variant="spokes"
-        color="#cf5387"
-        size="small"
-        text=""
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        }}
-      />
-    </Orbit>
+    <Container>
+      <Orbit>
+        <OrbitProgress
+          variant="spokes"
+          color="#ffffffff"
+          size="small"
+          text=""
+        />
+      </Orbit>
+    </Container>
   ) : (
     <>
       {viewContainer ? (
         <>
           <Container>
             <Title>Transferir</Title>
+            <Label>Chave de transferência</Label>
             <InputKey
-              placeholder="Chave Pix(CPF ou Email)"
+              placeholder="CPF ou Email"
               value={key}
-              onChange={(e) => setKey(e.target.value)}
+              onChange={(e) => {
+                setKey(e.target.value);
+              }}
             />
-            <Button onClick={() => { ShowContainer(); buscarConta(); }}>Confirmar</Button>
-            {viewData ? (
-              <Container2>
-                <Title>GAY</Title>
-              </Container2>
+            {/*Se digitou algo...*/}
+            {/*...Se a chave existe*/}
+            {key ? (
+              key !== null ? (
+                <ContainerLine>
+                  <p>Nome:</p>
+                  <p>Leonardo Henz</p>
+                  <p>Cpf:</p>
+                  <p>123456789</p>
+                </ContainerLine>
+              ) : (
+                <p>Conta inexistente</p>
+              )
             ) : (
-              <Button4 style={{ visibility: 'hidden' }} />
+              ''
             )}
-          </Container>
-          <Container>
+            <Button
+              onClick={() => {
+                ShowContainer();
+                buscarConta();
+              }}
+            >
+              Confirmar
+            </Button>
             <ContainerLine>
-              <Button4 style={{ visibility: 'hidden' }} />
-              <Button4 onClick={() => navigate('/home')}>
-                <span>Voltar</span>
-              </Button4>
+              <Button2 onClick={() => navigate('/home')}>Voltar</Button2>
             </ContainerLine>
           </Container>
         </>
       ) : (
         <>
           <Container>
-            <Title>Informe o valor</Title>
+            <Title>Transferir</Title>
+            <Label>Selecione o valor</Label>
             <InputValue
               type="text"
               value={'R$ ' + value}
@@ -129,15 +138,20 @@ export default function PaymentTable() {
                 setValue(text);
               }}
             />
-            <Button onClick={() => { navigate('/home'); transferir(); }}>Confirmar</Button>
-            
+            <Button
+              onClick={() => {
+                transferir();
+                navigate('/home');
+              }}
+            >
+              Confirmar
+            </Button>
           </Container>
           <Container>
             <ContainerLine>
-              <Button4 style={{ visibility: 'hidden' }} />
-              <Button4 onClick={ShowContainer}>
+              <Button2 onClick={ShowContainer}>
                 <span>Voltar</span>
-              </Button4>
+              </Button2>
             </ContainerLine>
           </Container>
         </>

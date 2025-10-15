@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
-import { OrbitProgress } from "react-loading-indicators";
-import IconPig from "../../images/pig.png";
-import IconBank from "../../images/bank.png";
-import UserContext from "../../contexts/UserContext";
-import { Client, setToken } from "../../api/client";
-import { setPermissions } from "../../service/PermissionService";
-import { setDataUser } from "../../service/UserService";
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { OrbitProgress } from 'react-loading-indicators';
+import IconPig from '../../images/pig.png';
+import IconBank from '../../images/bank.png';
+import UserContext from '../../contexts/UserContext';
+import { Client, setToken } from '../../api/client';
+import { setPermissions } from '../../service/PermissionService';
+import { setDataUser } from '../../service/UserService';
 import {
   Container,
   Title,
@@ -18,11 +18,11 @@ import {
   ContainerLine,
   Container2,
   Orbit,
-} from "./style";
+} from './style';
 
 export default function DataTableAdmin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [load, setLoad] = useState(true);
   const [viewButton, setViewButton] = useState(false);
   const [viewContainer, setViewContainer] = useState(true);
@@ -51,7 +51,7 @@ export default function DataTableAdmin() {
     setLoad(true);
 
     setTimeout(() => {
-      Client.post("auth/login", user)
+      Client.post('auth/login', user)
         .then((res) => {
           const load = res.data;
           console.log(load);
@@ -59,7 +59,7 @@ export default function DataTableAdmin() {
           setDataUser(load.user);
           setToken(load.token.value);
           setPermissions(load.permissions);
-          navigate("/home");
+          navigate('/home');
         })
         .catch(function (error) {
           setViewButton(true);
@@ -77,16 +77,7 @@ export default function DataTableAdmin() {
 
   return load ? (
     <Orbit>
-      <OrbitProgress
-        variant="spokes"
-        color="#cf5387"
-        size="small"
-        text=""
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)",
-        }}
-      />
+      <OrbitProgress variant="spokes" color="#ffffffff" size="small" text="" />
     </Orbit>
   ) : (
     <>
@@ -114,11 +105,11 @@ export default function DataTableAdmin() {
       </Container>
       <Container>
         <ContainerLine>
-          <Button4 onClick={() => navigate("/payment")}>
+          <Button4 onClick={() => navigate('/payment')}>
             ❖<span>Criar conta</span>
           </Button4>
-          <Button3 style={{ visibility: "hidden" }} />
-          <Button3 onClick={() => navigate("/users")}>
+          <Button3 style={{ visibility: 'hidden' }} />
+          <Button3 onClick={() => navigate('/users')}>
             <img src={IconBank} />
             <span>Usuarios</span>
           </Button3>

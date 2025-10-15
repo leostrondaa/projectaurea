@@ -31,16 +31,7 @@ export default function Login() {
 
   return load ? (
     <Container>
-      <OrbitProgress
-        variant="spokes"
-        color="#cf5387"
-        size="small"
-        text=""
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-        }}
-      />
+      <OrbitProgress variant="spokes" color="#000000ff" size="small" text="" />
     </Container>
   ) : (
     <Container>

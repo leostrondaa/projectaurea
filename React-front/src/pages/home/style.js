@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import fundo from '../../images/background.jpg';
 
 export const Container = styled.div`
+  background-image: url(${fundo});
+  background-size: cover;
   display: grid;
   grid-template-columns: 25% 75%;
   height: 100vh;
@@ -9,13 +11,12 @@ export const Container = styled.div`
 `;
 
 export const Left = styled.div`
-  background: #222;
+  background: transparent;
   color: white;
   padding: 1rem;
 `;
 
 export const Right = styled.div`
-  background-image: url(${fundo});
   display: flex;
   padding: 1rem;
 `;

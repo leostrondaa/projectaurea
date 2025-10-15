@@ -1,13 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #3c3c3cff;
+  background-color: rgba(0, 0, 0, 0.969);
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 5%;
   min-height: 100vh;
-  min-width: 50%;
+  border: 1px solid #ccccccff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  min-width: 100%;
 `;
 export const Container2 = styled.div`
   background-color: rgba(38, 38, 38, 1);
@@ -28,10 +31,9 @@ export const Orbit = styled.div`
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  background-color: #3c3c3cff;
-  display: flex;
-  gap: 20px;
-  padding: 5%;
+  border: 2px solid #ccccccff;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.969);
 `;
 
 export const Title = styled.h1`
@@ -41,7 +43,9 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h1`
-  margin-bottom: 10%;
+  margin-bottom: 9%;
+  margin-left: 20px;
+  font-size: 50px;
   color: #c0c0c0ff;
 `;
 
@@ -58,18 +62,19 @@ export const Button = styled.button`
   box-sizing: border-box;
   width: 100%;
   height: 35px;
-  background-color: #1e1e1ecb;
-  color: white;
+  background-color: #ffffffac;
+  color: black;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5%;
   border: none;
   border-radius: 10px;
   cursor: grab;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #1e1e1ecb;
+    transition: all 0.1s ease-in-out;
+    background-color: #ddddddff;
     transform: translateY(-2px);
   }
   &:active {
@@ -78,8 +83,8 @@ export const Button = styled.button`
 `;
 export const Button2 = styled.button`
   box-sizing: border-box;
-  width: 10%;
-  height: 35px;
+  width: 9%;
+  height: 45px;
   background-color: #1e1e1ecb;
   color: white;
   font-size: 16px;
@@ -92,7 +97,8 @@ export const Button2 = styled.button`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #1e1e1ecb;
+    transition: all 0.1s ease-in-out;
+    background-color: #252525ff;
     transform: translateY(-2px);
   }
   &:active {
@@ -100,80 +106,51 @@ export const Button2 = styled.button`
   }
 `;
 export const Button3 = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
-  width: 200px;
-  height: 430px;
+  width: 50%;
+  height: 80px;
   background-color: #1e1e1ecb;
   color: white;
-  font-size: 70px;
+  font-size: 50px;
   font-weight: bold;
   margin-top: 10px;
   border: none;
   border-radius: 10px;
   cursor: grab;
-  position: relative;
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: #1e1e1ecb;
+    transition: all 0.1s ease-in-out;
+    background-color: #252525ff;
     transform: translateY(-2px);
+
+    img {
+      transform: translateX(-40px);
+    }
+    span {
+      transform: translateX(40%);
+      opacity: 1;
+    }
   }
+
   &:active {
     transform: translateY(0);
   }
 
   span {
     position: absolute;
-    bottom: 100px; /* começa fora do botão */
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 16px;
     opacity: 0;
     transition: all 0.3s ease-in-out;
   }
 
-  &:hover span {
-    bottom: 115px;
-    opacity: 1;
-  }
-`;
-
-export const Button4 = styled.button`
-  box-sizing: border-box;
-  width: 200px;
-  height: 430px;
-  background-color: #1e1e1ecb;
-  color: white;
-  font-size: 70px;
-  font-weight: bold;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: grab;
-  position: absolute;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: #1e1e1ecb;
-    transform: translateY(-2px);
-  }
-  &:active {
-    transform: translateY(0);
-  }
-
-  span {
-    position: absolute;
-    bottom: 100px; /* começa fora do botão */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    opacity: 0;
+  img {
+    width: 50px;
+    height: 50px;
     transition: all 0.3s ease-in-out;
-  }
-
-  &:hover span {
-    bottom: 115px;
-    opacity: 1;
   }
 `;

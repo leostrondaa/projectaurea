@@ -1,33 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #3c3c3cff;
+  background-color: rgba(0, 0, 0, 0.969);
   display: flex;
   flex-direction: column;
+  color: rgba(255, 255, 255, 0.53);
   gap: 20px;
   padding: 5%;
   min-height: 100vh;
-  min-width: 50%;
+  border: 1px solid #ccccccff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  min-width: 100%;
 `;
-export const Container2 = styled.div`
-  background-color: rgba(38, 38, 38, 1);
-  display: flex;
-  border-radius: 10px;
-  flex-direction: column;
-  gap: 20px;
-  height: 300px;
-  width: 100%;
-`;
+
 export const Orbit = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  background-color: #3c3c3cff;
-  display: flex;
-  gap: 20px;
-  padding: 5%;
+  background-color: transparent;
 `;
 export const ContainerLine = styled.div`
   display: flex;
@@ -41,12 +34,10 @@ export const Title = styled.h1`
 `;
 
 export const Label = styled.label`
-  display: block;
   font-size: 18px;
   border: 10px;
-  padding: 20px;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  color: white;
+  margin-top: 10%;
 `;
 export const Button = styled.button`
   box-sizing: border-box;
@@ -63,82 +54,66 @@ export const Button = styled.button`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #1e1e1ecb;
+    transition: all 0.1s ease-in-out;
+    background-color: #252525ff;
     transform: translateY(-2px);
   }
   &:active {
     transform: translateY(0);
   }
 `;
-export const Button4 = styled.button`
+
+export const Button2 = styled.button`
   box-sizing: border-box;
-  width: 200px;
-  height: 430px;
+  width: 10%;
+  height: 35px;
   background-color: #1e1e1ecb;
   color: white;
-  font-size: 70px;
+  font-size: 16px;
   font-weight: bold;
-  margin-top: 10px;
   border: none;
   border-radius: 10px;
   cursor: grab;
-  position: absolute;
   transition: all 0.2s ease-in-out;
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
 
   &:hover {
-    background-color: #1e1e1ecb;
+    transition: all 0.1s ease-in-out;
+    background-color: #252525ff;
     transform: translateY(-2px);
   }
   &:active {
     transform: translateY(0);
-  }
-
-  span {
-    position: absolute;
-    bottom: 100px; /* começa fora do botão */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover span {
-    bottom: 115px;
-    opacity: 1;
   }
 `;
 
 export const InputKey = styled.input`
-  display: inline-block;
+  background-color: rgba(255, 255, 255, 1);
   width: 100%;
   height: 50px;
   border-radius: 8px;
   border: 1px solid gray;
-  margin-top: 30px;
-  padding: 10px;
-
-  &:hover {
+  padding: 5px;
+  &:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.81);
     transition: all 0.1s ease-in-out;
     border: 2px solid gray;
   }
 `;
 
 export const InputValue = styled.input`
-  display: inline-block;
+  background-color: rgba(255, 255, 255, 1);
   width: 100%;
-  height: 100px;
-  font-size: 30px;
+  height: 50px;
   border-radius: 8px;
   border: 1px solid gray;
-  margin-top: 30px;
-  padding: 10px;
-
-  &:hover {
+  padding: 5px;
+  &:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.81);
     transition: all 0.1s ease-in-out;
     border: 2px solid gray;
   }
