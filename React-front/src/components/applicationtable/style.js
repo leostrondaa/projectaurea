@@ -56,7 +56,6 @@ export const Button = styled.button`
   &:hover {
     transition: all 0.1s ease-in-out;
     background-color: #252525ff;
-
     transform: translateY(-2px);
   }
   &:active {
@@ -91,7 +90,7 @@ export const Button2 = styled.button`
 `;
 
 export const InputValue = styled.input`
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(97, 97, 97, 0.53);
   width: 100%;
   height: 50px;
   border-radius: 8px;

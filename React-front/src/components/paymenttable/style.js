@@ -90,7 +90,7 @@ export const Button2 = styled.button`
 `;
 
 export const InputKey = styled.input`
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(97, 97, 97, 0.53);
   width: 100%;
   height: 50px;
   border-radius: 8px;
@@ -105,7 +105,7 @@ export const InputKey = styled.input`
 `;
 
 export const InputValue = styled.input`
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(97, 97, 97, 0.53);
   width: 100%;
   height: 50px;
   border-radius: 8px;

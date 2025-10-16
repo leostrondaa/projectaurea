@@ -35,7 +35,7 @@ export const Label = styled.label`
 `;
 
 export const InputEmail = styled.input.attrs({ type: 'email' })`
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(97, 97, 97, 0.53);
   display: inline-block;
   width: 100%;
   height: 30px;
@@ -51,7 +51,7 @@ export const InputEmail = styled.input.attrs({ type: 'email' })`
 `;
 
 export const InputPassword = styled.input.attrs({ type: 'password' })`
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(97, 97, 97, 0.53);
 
   display: inline-block;
   width: 100%;
@@ -101,8 +101,12 @@ export const Submit = styled.input.attrs({ type: 'submit' })`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #d2d2d2ff;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    background-color: #252525ff;
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
   }
 `;
 

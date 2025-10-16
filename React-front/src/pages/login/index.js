@@ -31,7 +31,7 @@ export default function Login() {
 
   return load ? (
     <Container>
-      <OrbitProgress variant="spokes" color="#000000ff" size="small" text="" />
+      <OrbitProgress variant="spokes" color="#ffffffff" size="small" text="" />
     </Container>
   ) : (
     <Container>
